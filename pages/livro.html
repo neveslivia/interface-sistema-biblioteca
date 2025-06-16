@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cadastro de Livro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
 
+  <!-- NAVBAR -->
   <nav class="bg-gray-800 p-4">
     <div class="container mx-auto flex justify-between items-center">
       <a class="text-white font-bold text-xl" href="#">Biblioteca</a>
@@ -15,79 +17,82 @@
       </div>
     </div>
   </nav>
-  <div class="container mx-auto mt-8 p-4">
-    <h2 class="text-2xl font-bold mb-4">Formulário de Cadastro</h2>
-    <form id="formCadastro" class="bg-white shadow-md rounded p-4">
-     <input type="hidden" id="id" />
 
-     <div class="mb-4">
-       <label for="bibliotecarioId" class="block text-gray-700 font-bold mb-2">ID Bibliotecário</label>
-       <input type="number" id="bibliotecarioId" class="w-full px-3 py-2 border rounded" required>
-      </div>
+  <!-- CONTEÚDO -->
+  <div class="max-w-5xl mx-auto mt-8 p-4">
+    <!-- FORMULÁRIO -->
+    <h2 class="text-2xl font-bold mb-4 text-center">Formulário de Cadastro</h2>
+    <form id="formCadastro" class="bg-white shadow-md rounded p-6 space-y-4">
+      <input type="hidden" id="id" />
 
-      <div class="mb-4">
-        <label for="titulo" class="block text-gray-700 font-bold mb-2">Título</label>
-        <input type="text" id="titulo" class="w-full px-3 py-2 border rounded" required>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="bibliotecarioId" class="block text-gray-700 font-semibold mb-1">ID Bibliotecário</label>
+          <input type="number" id="bibliotecarioId" class="w-full px-3 py-2 border rounded" required>
+        </div>
 
-      <div class="mb-4">
-        <label for="autor" class="block text-gray-700 font-bold mb-2">Autor</label>
-        <input type="text" id="autor" class="w-full px-3 py-2 border rounded" required>
-     </div>
+        <div>
+          <label for="titulo" class="block text-gray-700 font-semibold mb-1">Título</label>
+          <input type="text" id="titulo" class="w-full px-3 py-2 border rounded" required>
+        </div>
 
-      <div class="mb-4">
-         <label for="genero" class="block text-gray-700 font-bold mb-2">Gênero</label>
-         <input type="text" id="genero" class="w-full px-3 py-2 border rounded" required>
-      </div>
+        <div>
+          <label for="autor" class="block text-gray-700 font-semibold mb-1">Autor</label>
+          <input type="text" id="autor" class="w-full px-3 py-2 border rounded" required>
+        </div>
 
-      <div class="mb-4">
-        <label for="status" class="block text-gray-700 font-bold mb-2">Status</label>
+        <div>
+          <label for="genero" class="block text-gray-700 font-semibold mb-1">Gênero</label>
+          <input type="text" id="genero" class="w-full px-3 py-2 border rounded" required>
+        </div>
+
+        <div>
+          <label for="status" class="block text-gray-700 font-semibold mb-1">Status</label>
           <select id="status" class="w-full px-3 py-2 border rounded" required>
             <option value="" disabled selected>Selecione</option>
             <option value="DISPONIVEL">Disponível</option>
             <option value="EMPRESTADO">Emprestado</option>
             <option value="RESERVADO">Reservado</option>
-         </select>
+          </select>
+        </div>
+
+        <div>
+          <label for="dataCadastro" class="block text-gray-700 font-semibold mb-1">Data de Cadastro</label>
+          <input type="date" id="dataCadastro" class="w-full px-3 py-2 border rounded" required>
+        </div>
       </div>
 
-  <div class="mb-4">
-    <label for="dataCadastro" class="block text-gray-700 font-bold mb-2">Data de Cadastro</label>
-    <input type="date" id="dataCadastro" class="w-full px-3 py-2 border rounded" required>
+      <div class="flex gap-2">
+        <button type="submit" id="btnAdicionar" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Adicionar</button>
+        <button type="button" id="btnAtualizar" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hidden">Atualizar</button>
+      </div>
+    </form>
+
+    <!-- TABELA -->
+    <h2 class="text-2xl font-bold mt-10 mb-4 text-center">Tabela de Cadastros</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full table-auto bg-white shadow-md rounded text-sm">
+        <thead class="bg-gray-200 text-gray-700">
+          <tr>
+            <th class="px-4 py-2 text-left">ID</th>
+            <th class="px-4 py-2 text-left">ID Bibliotecário</th>
+            <th class="px-4 py-2 text-left">Título</th>
+            <th class="px-4 py-2 text-left">Autor</th>
+            <th class="px-4 py-2 text-left">Gênero</th>
+            <th class="px-4 py-2 text-left">Status</th>
+            <th class="px-4 py-2 text-left">Data Cadastro</th>
+            <th class="px-4 py-2 text-left">Ação</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaCorpo">
+          <!-- Linhas da tabela vão aqui -->
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="flex gap-2">
-    <button type="submit" id="btnAdicionar" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Adicionar</button>
-    <button type="button" id="btnAtualizar" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hidden">Atualizar</button>
-  </div>
-</form>
-
-    <h2 class="text-2xl font-bold mt-8 mb-4">Tabela de Cadastros</h2>
-    <table  class="w-full table-auto bg-white shadow-md rounded">
-      <thead class="bg-gray-200">
-        <tr>
-          <th class="px-4 py-2">ID</th>
-          <th class="px-4 py-2">ID Bliotecário</th>
-          <th class="px-4 py-2">Título</th>
-          <th class="px-4 py-2">Autor</th>
-          <th class="px-4 py-2">Gênero</th>
-          <th class="px-4 py-2">Status</th>
-          <th class="px-4 py-2">Data Cadastro</th>
-          <th class="px-4 py-2">Ação</th>
- 
-          
-        </tr>
-      </thead>
-      <tbody id="tabelaCorpo">
-      </tbody>
-    </table>
-  </div>
-    <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!--Adicionando Noditificação-->
+  <!-- SweetAlert e Script -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
-  <!--Meu Script da pagina-->
-  <script src="/interface-biblioteca//assets/js/livro.js"></script>
+  <script src="/assets/js/livro.js"></script>
 </body>
 </html>
